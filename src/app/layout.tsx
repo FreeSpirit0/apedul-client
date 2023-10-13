@@ -1,7 +1,12 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { IBM_Plex_Mono, Inter } from 'next/font/google'
+import Navbar from './components/navigation/navbar'
 
+const ibm = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: '400'
+})
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,7 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={ibm.className}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   )
 }
