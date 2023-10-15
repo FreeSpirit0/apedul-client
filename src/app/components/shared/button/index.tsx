@@ -1,8 +1,8 @@
 import React from "react";
 
-const Button: React.FC<ButtonProps> = ({ text }) => {
+const Button: React.FC<ButtonProps> = ({ text, onClick ,style }) => {
   return (
-    <button className="h-12 w-full border-black border-2 p-2.5 bg-[#67568C] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#67568C] rounded-md">
+    <button onClick={onClick} className={` border-black border-2 bg-[#67568C] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#67568C] ${style}`}>
       {text}
     </button>
   );
@@ -10,6 +10,8 @@ const Button: React.FC<ButtonProps> = ({ text }) => {
 
 interface ButtonProps {
     text: string,
+    onClick: (e: any) => void
+    style: string
 }
 
 export default Button;

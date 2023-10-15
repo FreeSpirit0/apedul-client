@@ -1,31 +1,50 @@
+'use client'
+
 import Image from "next/image";
 import Button from "./components/shared/button";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const fetchData = async () => {
+    await fetch("https://apedul.as.r.appspot.com/guess", {
+      method: "post",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({})
+    }).then(res => res.json()).then(data => console.log(data));
+  };
+
+  const handleClick = (e: any) => { fetchData() }
+
   return (
-    <main className="flex min-h-screen flex-col items-center gap-8 p-24">
+    <main className="flex min-h-screen flex-col items-center gap-6 p-8 bg-white">
       <div className="z-10 max-w-5xl w-full justify-center items-center text-sm text-white lg:flex">
-        <Button text={"Guess your NFT"} />
+        <Button
+          text={"Guess your NFT"}
+          style={"bg-white text-black font-bold text-xl w-3/5 h-12"}
+        />
       </div>
 
-      <div className="w-full flex justify-between gap-8">
-          <Image
-            className="dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
+      <div className="w-full flex flex-1 items-center justify-center gap-20">
+        <Image
+          className="dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+          src="/next.svg"
+          alt="Next.js Logo"
+          width={180}
+          height={37}
+          priority
+        />
+
+        <div className="mb-32 flex flex-col items-center gap-4 text-white lg:max-w-5xl lg:mb-0 lg:text-left">
+          <Button
+            text={"Does your NFT got an earring?"}
+            style={"bg-[#FF6E6C] text-xl p-10 rounded-md"}
           />
-
-        <div className="mb-32 grid place-items-center text-white lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-rows-2 lg:text-left">
-
-            <Button text={"Does your NFT got an earring?"} />
-            <div className="w-40 flex flex-col gap-4">
-              <Button text={"Yes"} />
-              <Button text={"No"} />
-            </div>
-            
+          <div className="w-40 flex flex-col gap-4">
+            <Button text={"Yes"} style={"p-2"} onClick={handleClick} />
+            <Button text={"No"} style={"p-2"} />
+          </div>
 
           {/* <a
             href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
