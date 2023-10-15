@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import TextBox from "../components/shared/text-box";
 import NFT from "../types/NFT";
 
-export default function Home() {
+export default function Guess() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState<number[]>([]);
   const [nft, setNft] = useState<NFT>({ tokenId: '', img: ''});

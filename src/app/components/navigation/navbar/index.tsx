@@ -12,7 +12,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-full">
             <ul className="hidden md:flex gap-x-6 text-white text-center items-center">
               <li className="">
-                <Link href="/about">
+                <Link href="/guess">
                   <p className="text-black font-bold">Guess</p>
                 </Link>
               </li>
