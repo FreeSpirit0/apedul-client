@@ -1,10 +1,10 @@
 'use client'
 
 import Image from "next/image";
-import Button from "./components/shared/button";
+import Button from "../components/shared/button";
 import { useEffect, useState } from "react";
-import TextBox from "./components/shared/text-box";
-import NFT from "./types/NFT";
+import TextBox from "../components/shared/text-box";
+import NFT from "../types/NFT";
 
 export default function Home() {
   const [questions, setQuestions] = useState([]);
@@ -53,7 +53,7 @@ export default function Home() {
       </div>
 
       <div className="w-full flex flex-1 items-center justify-center gap-20">
-        { isFound ? <img
+        { isFound ? <Image
           src={nft.img}
           alt="NFT"
           width={180}
