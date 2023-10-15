@@ -5,17 +5,35 @@ import Button from "./components/shared/button";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState<number[]>([]);
+
+  useEffect(() => {
+    fetchData()
+  
+    return () => {
+      
+    }
+  }, [answers])
+
   const fetchData = async () => {
     await fetch("https://apedul.as.r.appspot.com/guess", {
       method: "post",
       headers: {
-        'Content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({})
-    }).then(res => res.json()).then(data => console.log(data));
+      body: JSON.stringify({ question: questions, answer: answers })
+    }).then(res => res.json()).then(data => { console.log(data); setQuestions(data.question)});
   };
 
-  const handleClick = (e: any) => { fetchData() }
+  const handleYes = (e: any) => { 
+    setAnswers([...answers, 1]);
+    console.log(answers, questions)
+  }
+  const handleNo = (e: any) => {
+    setAnswers([...answers, 0]);
+    console.log(answers, questions)
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-6 p-8 bg-white">
@@ -23,6 +41,7 @@ export default function Home() {
         <Button
           text={"Guess your NFT"}
           style={"bg-white text-black font-bold text-xl w-3/5 h-12"}
+          onClick={() => {}}
         />
       </div>
 
@@ -38,12 +57,13 @@ export default function Home() {
 
         <div className="mb-32 flex flex-col items-center gap-4 text-white lg:max-w-5xl lg:mb-0 lg:text-left">
           <Button
-            text={"Does your NFT got an earring?"}
+            text={`Does your NFT got an ${questions.slice(-1)}?`}
             style={"bg-[#FF6E6C] text-xl p-10 rounded-md"}
+            onClick={() => {}}
           />
           <div className="w-40 flex flex-col gap-4">
-            <Button text={"Yes"} style={"p-2"} onClick={handleClick} />
-            <Button text={"No"} style={"p-2"} />
+            <Button text={"Yes"} style={"p-2"} onClick={handleYes} />
+            <Button text={"No"} style={"p-2"} onClick={handleNo} />
           </div>
 
           {/* <a

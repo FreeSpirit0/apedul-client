@@ -18,7 +18,7 @@ const Navbar = () => {
                 <p className="text-black text-3xl">|</p>
               </li>
               <li>
-                <Button text={"Support Us"} style={"rounded-md p-2"} />
+                <Button text={"Support Us"} style={"rounded-md p-2"} onClick={() => {}}/>
               </li>
             </ul>
           </div>
