@@ -7,7 +7,7 @@ import Button from "../../shared/button";
 const Navbar = () => {
   return (
     <>
-      <div className="w-full h-20 bg-white border-b border-black">
+      <div className="w-full h-20 bg-white border-b-2 border-black">
         <div className="container mx-auto px-4 h-full">
           <div className="flex justify-between items-center h-full">
             <ul className="hidden md:flex gap-x-6 text-white text-center items-center">
@@ -19,9 +19,9 @@ const Navbar = () => {
               <li>
                 <p className="text-black text-3xl">|</p>
               </li>
-              <li>
+              {/* <li> */}
                 <Button text={"Support Us"} style={"rounded-md p-2"} onClick={() => {}}/>
-              </li>
+              {/* </li> */}
             </ul>
           </div>
         </div>
