@@ -7,14 +7,14 @@ const TraitsBox: React.FC<TraitsBoxProps> = ({ traits, answers }) => {
         <thead className="text-gray-700">
           <tr>
             {traits.map((t) => (
-              <th>{t}</th>
+              <th key={t}>{t}</th>
             ))} 
           </tr>
         </thead>
         <tbody>
           <tr>
-            {answers.map((a) => (
-              <td>{Number(a) === 1 ? "✅" : "❌"}</td>
+            {answers.map((a, i) => (
+              <td key={i}>{Number(a) === 1 ? "✅" : "❌"}</td>
             ))}
           </tr>
         </tbody>
