@@ -5,6 +5,7 @@ import Button from "../components/shared/button";
 import { useEffect, useState } from "react";
 import TextBox from "../components/shared/text-box";
 import NFT from "../types/NFT";
+import TraitsBox from "./traits-box";
 
 export default function Guess() {
   const [questions, setQuestions] = useState([]);
@@ -20,6 +21,8 @@ export default function Guess() {
     }
   }, [answers])
 
+  const formatUnderscore =  (text: string[]) => text.map(t => t.split("_").join(" "))
+
   const fetchData = async () => {
     await fetch("https://apedul.as.r.appspot.com/guess", {
       method: "post",
@@ -30,19 +33,18 @@ export default function Guess() {
     }).then(res => res.json()).then(data => { 
       if (data.img.length != 0) {
         setNft({ tokenId: data.tokenId, img: data.img[0].replace("ipfs://", "https://ipfs.io/ipfs/") })
+        
         setIsFound(true);
       }
-      console.log(data); setQuestions(data.question)
+      setQuestions(data.question)
     });
   };
 
   const handleYes = (e: any) => { 
     setAnswers([...answers, 1]);
-    console.log(answers, questions)
   }
   const handleNo = (e: any) => {
     setAnswers([...answers, 0]);
-    console.log(answers, questions)
   }
 
   return (
@@ -52,17 +54,17 @@ export default function Guess() {
           text={"Guess your NFT"} style={"px-20 py-5"}        />
       </div>
 
-      <div className="w-full flex flex-1 items-center justify-center gap-20">
+      <div className="flex-1 w-full grid grid-cols-2 items-center justify-items-center">
         { isFound ? <Image
           src={nft.img}
           alt="NFT"
           width={180}
           height={37}
-        /> : <p className="text-black animate-spin text-6xl">?</p>}
+        /> : <p className="text-black animate-spin text-6xl w-fit">?</p>}
         
 
         {
-          !isFound ? (<div className="mb-32 flex flex-col items-center gap-4 text-white lg:max-w-5xl lg:mb-0 lg:text-left">
+          !isFound ? (<div className="mb-32 flex flex-col items-center gap-4 text-white lg:max-w-7xl lg:mb-0 lg:text-left">
           <Button
             text={`Does your NFT got an ${questions.slice(-1)}?`}
             style={"bg-[#FF6E6C] text-xl p-10 rounded-md"}
@@ -74,6 +76,9 @@ export default function Guess() {
           </div>
         </div>) : <p className="text-black">This is your NFT !!!</p>
         }
+        <div className="w-4/5 col-span-2">
+          <TraitsBox traits={formatUnderscore(questions)} answers={answers} />
+        </div>
       </div>
     </main>
   );
