@@ -15,6 +15,12 @@ const Navbar = () => {
               <li>
                 <Image width={70} height={20} src={"/apedul.png"} alt={""} />
               </li>
+              <li>
+                <p className="text-black font-bold">Apedul</p>
+              </li>
+              <li>
+                <p className="text-black text-3xl">|</p>
+              </li>
               <li className="">
                 <Link href="/guess">
                   <p className="text-black font-bold">Guess</p>
