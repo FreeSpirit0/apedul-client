@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Button from "../../shared/button";
+import Image from "next/image";
 
 const Navbar = () => {
   return (
@@ -11,6 +12,9 @@ const Navbar = () => {
         <div className="container mx-auto px-4 h-full">
           <div className="flex justify-between items-center h-full">
             <ul className="hidden md:flex gap-x-6 text-white text-center items-center">
+              <li>
+                <Image width={70} height={20} src={"/apedul.png"} alt={""} />
+              </li>
               <li className="">
                 <Link href="/guess">
                   <p className="text-black font-bold">Guess</p>
