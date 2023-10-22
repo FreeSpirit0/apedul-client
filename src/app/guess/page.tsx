@@ -46,6 +46,12 @@ export default function Guess() {
   const handleNo = (e: any) => {
     setAnswers([...answers, 0]);
   }
+  const handleRestart = (e: any) => {
+    setAnswers([]);
+    setQuestions([]);
+    setIsFound(false);
+    setNft({ tokenId: '', img: ''});
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-6 p-8 bg-white">
@@ -55,12 +61,15 @@ export default function Guess() {
       </div>
 
       <div className="flex-1 w-full grid grid-cols-2 items-center justify-items-center">
-        { isFound ? <Image
+        { isFound ? <div className="flex flex-col justify-center gap-4 items-center">
+          <Image
           src={nft.img}
           alt="NFT"
           width={180}
           height={37}
-        /> : <p className="text-black animate-spin text-6xl w-fit">?</p>}
+        />
+        <p className="text-black">Token ID: {nft.tokenId}</p>
+        </div> : <p className="text-black animate-spin text-6xl w-fit">?</p>}
         
 
         {
@@ -74,7 +83,10 @@ export default function Guess() {
             <Button text={"Yes"} style={"p-2"} onClick={handleYes} />
             <Button text={"No"} style={"p-2"} onClick={handleNo} />
           </div>
-        </div>) : <p className="text-black">This is your NFT !!!</p>
+        </div>) : <div>
+          <p className="text-black mb-4">This is your NFT !!!</p>
+          <Button text="Guess Again?" style="p-2 text-white rounded-md text-center" onClick={handleRestart}></Button>
+          </div>
         }
         <div className="w-4/5 col-span-2">
           <TraitsBox traits={formatUnderscore(questions)} answers={answers} />
