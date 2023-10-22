@@ -6,15 +6,17 @@ import { useEffect, useState } from "react";
 import TextBox from "../components/shared/text-box";
 import NFT from "../types/NFT";
 import TraitsBox from "./traits-box";
+import LoadingSpinner from "../components/shared/loading-spinner";
 
 export default function Guess() {
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState<string[]>([]);
   const [answers, setAnswers] = useState<number[]>([]);
   const [nft, setNft] = useState<NFT>({ tokenId: '', img: ''});
   const [isFound, setIsFound] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchData()
+    fetchData().then(_ => setIsLoading(false))
   
     return () => {
       
@@ -70,12 +72,10 @@ export default function Guess() {
         />
         <p className="text-black">Token ID: {nft.tokenId}</p>
         </div> : <p className="text-black animate-spin text-6xl w-fit">?</p>}
-        
-
         {
-          !isFound ? (<div className="mb-32 flex flex-col items-center gap-4 text-white lg:max-w-7xl lg:mb-0 lg:text-left">
+          isLoading ? <LoadingSpinner /> : !isFound ? (<div className="mb-32 flex flex-col items-center gap-4 text-white lg:max-w-7xl lg:mb-0 lg:text-left">
           <Button
-            text={`Does your NFT got an ${questions.slice(-1)}?`}
+            text={`Does your NFT got an ${questions.slice(-1)[0].split('_').join(' ')}?`}
             style={"bg-[#FF6E6C] text-xl p-10 rounded-md"}
             onClick={() => {}}
           />
@@ -89,6 +89,7 @@ export default function Guess() {
           </div>
         }
         <div className="w-4/5 col-span-2">
+          <p className="text-black text-bold text-xl mb-2">Current Traits:</p>
           <TraitsBox traits={formatUnderscore(questions)} answers={answers} />
         </div>
       </div>
