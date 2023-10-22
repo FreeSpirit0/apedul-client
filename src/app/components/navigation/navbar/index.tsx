@@ -22,11 +22,13 @@ const Navbar = () => {
                 <p className="text-black font-bold">Guess</p>
               </Link>
                 <p className="text-black text-3xl">|</p>
-              <Button
-                text={"Support Us"}
-                style={"text-white rounded-md p-2"}
-                onClick={() => {}}
-              />
+              <Link href={"https://github.com/apedul"}>
+                <Button
+                  text={"Support Us"}
+                  style={"text-white rounded-md p-2"}
+                  onClick={() => {}}
+                />
+              </Link>
             </div>
           </div>
         </div>
