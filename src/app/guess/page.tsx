@@ -67,8 +67,8 @@ export default function Guess() {
           <Image
           src={nft.img}
           alt="NFT"
-          width={180}
-          height={37}
+          width={300}
+          height={50}
         />
         <p className="text-black">Token ID: {nft.tokenId}</p>
         </div> : <p className="text-black animate-spin text-6xl w-fit">?</p>}
